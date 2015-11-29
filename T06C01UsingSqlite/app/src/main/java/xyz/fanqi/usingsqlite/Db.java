@@ -21,6 +21,7 @@ public class Db extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // 创建user表
         db.execSQL("CREATE TABLE user(" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT DEFAULT NONE," +
                 "gender TEXT DEFAULT \"\")");
     }
