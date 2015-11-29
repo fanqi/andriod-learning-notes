@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">垃圾短信拦截器</string>
+    <string name="settings">设置</string>
+    <string name="add" >添加</string>
+    <string name="please_input">请输入</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="prompt">提醒</string>
+    <string name="sure_delete">您确定要删除该项吗</string>
+    <string name="edit_keyword">编辑关键字</string>
+    <string name="edit_number">编辑发送者</string>
+</resources>
