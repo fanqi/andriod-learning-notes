@@ -15,10 +15,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyAty" android:exported="false">
+        <activity
+            android:name=".MyAty" android:label="MyAty">
             <intent-filter>
-                <action android:name="xyz.fanqi.learnintent.intent.action.MYATY"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="xyz.fanqi.learnintent.intent.action.MYATY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MyAty1" android:label="MyAty1">
+            <intent-filter>
+                <action android:name="xyz.fanqi.learnintent.intent.action.MYATY" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="app"/>
             </intent-filter>
         </activity>
     </application>
