@@ -15,12 +15,14 @@ import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class InterceptActivity extends ListActivity {
     private SimpleCursorAdapter simpleCursorAdapter;
     private Db db;
-    private SQLiteDatabase dbRead;
-    private SQLiteDatabase dbWrite;
+    private SQLiteDatabase dbReader;
+    private SQLiteDatabase dbWriter;
+    private Cursor interceptCursor;
     private String type;
 
     @Override
@@ -32,8 +34,8 @@ public class InterceptActivity extends ListActivity {
         type=intent.getStringExtra("type");
 
         db = new Db(this);
-        dbRead = db.getReadableDatabase();
-        dbWrite = db.getWritableDatabase();
+        dbReader = db.getReadableDatabase();
+        dbWriter = db.getWritableDatabase();
 
 
         simpleCursorAdapter = new SimpleCursorAdapter
@@ -55,17 +57,18 @@ public class InterceptActivity extends ListActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 new AlertDialog.Builder(InterceptActivity.this)
                         .setTitle(getResources().getString(R.string.prompt))
-                        .setMessage(getResources().getString(R.string.sure_delete)+"?")
+                        .setMessage(getResources().getString(R.string.sure_delete) + "?")
                         .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Cursor cursor = simpleCursorAdapter.getCursor();
-                        cursor.moveToPosition(position);
-                        int itemId = cursor.getInt(cursor.getColumnIndex("_id"));
-                        dbWrite.delete("intercept", "_id=?", new String[]{itemId + ""});
-                        refreshListView();
-                    }
-                }).setNegativeButton(getResources().getString(R.string.cancel), null).show();
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Cursor cursor = simpleCursorAdapter.getCursor();
+                                cursor.moveToPosition(position);
+                                int itemId = cursor.getInt(cursor.getColumnIndex("_id"));
+                                dbWriter.delete("intercept", "_id=?", new String[]{itemId + ""});
+                                cursor.close();
+                                refreshListView();
+                            }
+                        }).setNegativeButton(getResources().getString(R.string.cancel), null).show();
 
                 return true;
             }
@@ -82,11 +85,18 @@ public class InterceptActivity extends ListActivity {
                 .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ContentValues values = new ContentValues();
-                        values.put("type",type);
-                        values.put("content",etContent.getText().toString());
-                        dbWrite.insert("intercept",null,values);
-                        refreshListView();
+                        String content = etContent.getText().toString().trim();
+                        if (content.equals("")) {
+                            Toast.makeText(InterceptActivity.this,getResources().getString(R.string.not_null),Toast.LENGTH_LONG).show();
+                        } else {
+                            ContentValues values = new ContentValues();
+                            values.put("type", type);
+                            values.put("content",content);
+                            dbWriter.insert("intercept", null, values);
+                            refreshListView();
+                        }
+
+
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.cancel), null)
@@ -94,9 +104,16 @@ public class InterceptActivity extends ListActivity {
     }
 
     private void refreshListView(){
-        Cursor userCursor = dbRead.query("intercept", null, "type=?", new String[]{type}, null, null, null);
-        simpleCursorAdapter.changeCursor(userCursor);
+        interceptCursor = dbReader.query("intercept", null, "type=?", new String[]{type}, null, null, null);
+        simpleCursorAdapter.changeCursor(interceptCursor);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        interceptCursor.close();
+        dbReader.close();
+        dbWriter.close();
+        db.close();
+    }
 }

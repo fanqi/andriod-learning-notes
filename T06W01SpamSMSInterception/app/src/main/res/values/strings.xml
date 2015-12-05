@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Spam SMS Interception</string>
     <string name="settings">Settings</string>
@@ -10,4 +11,5 @@
     <string name="edit_keyword">Edit Keyword</string>
     <string name="edit_number">Edit Number</string>
     <string name="edit_intercept">Please Edit Intercept</string>
+    <string name="not_null">Not Null</string>
 </resources>

@@ -10,4 +10,6 @@
     <string name="sure_delete">您确定要删除该项吗</string>
     <string name="edit_keyword">编辑关键字</string>
     <string name="edit_number">编辑发送者</string>
+    <string name="edit_intercept">请编辑您要屏蔽的关键字和发送者</string>
+    <string name="not_null">不能为空</string>
 </resources>

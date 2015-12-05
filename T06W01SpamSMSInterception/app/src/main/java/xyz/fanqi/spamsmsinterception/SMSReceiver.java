@@ -42,7 +42,6 @@ public class SMSReceiver extends BroadcastReceiver {
             content += smsMessage.getMessageBody();//得到短信内容
         }
 
-        //
         db = new Db(context);
         dbReader = db.getReadableDatabase();
 
@@ -58,6 +57,7 @@ public class SMSReceiver extends BroadcastReceiver {
             }
         }
         interceptCursor.close();
+        dbReader.close();
 
         if(isSpamSMS){
             dbWriter = db.getWritableDatabase();
@@ -65,8 +65,13 @@ public class SMSReceiver extends BroadcastReceiver {
             cv.put("sendNumber",sendNumber);
             cv.put("sendTime",sendTime);
             cv.put("content",content);
-            dbWriter.insert("sms",null,cv);
+            dbWriter.insert("sms", null, cv);
             abortBroadcast();
+            context.sendBroadcast(new Intent("xyz.fanqi.spamsmsinterception.intent.action.SpamSMSReciver"));
+            dbWriter.close();
         }
+
+        db.close();
     }
+
 }
