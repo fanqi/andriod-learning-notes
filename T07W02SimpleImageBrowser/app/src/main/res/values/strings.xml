@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Simple Image Browser</string>
+    <string name="open_default_image">Open Default Image</string>
+</resources>
