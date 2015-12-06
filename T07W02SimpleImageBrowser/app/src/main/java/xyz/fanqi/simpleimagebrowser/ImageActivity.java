@@ -16,5 +16,6 @@ public class ImageActivity extends AppCompatActivity {
         imageView = (ImageView)findViewById(R.id.imageView);
         Intent intent = getIntent();
         imageView.setImageURI(intent.getData());
+        System.out.println(intent.getData());
     }
 }
