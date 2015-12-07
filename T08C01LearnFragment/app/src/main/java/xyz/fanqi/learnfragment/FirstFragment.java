@@ -11,9 +11,17 @@ import android.view.ViewGroup;
  * Created by fanqi on 15/12/7.
  */
 public class FirstFragment extends Fragment {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        System.out.println("First Fragment Create");
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        System.out.println("First Fragment CreateView");
+
         View view = inflater.inflate(R.layout.fragment_first, container, false);
         view.findViewById(R.id.btnShowSecondFragment).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,5 +34,23 @@ public class FirstFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        System.out.println("First Fragment Pause");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.out.println("First Fragment DestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.out.println("First Fragment Destroy");
     }
 }
