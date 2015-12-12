@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvEnabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enabled:" />
+
+    <Button
+        android:id="@+id/btnEnabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_skin"
+        android:text="Click me"
+        android:textAllCaps="false"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/tvDisabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disabled:" />
+
+    <Button
+        android:id="@+id/btnDisabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_skin"
+        android:enabled="false"
+        android:text="Click me"
+        android:textAllCaps="false"
+        android:textSize="30dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        style="@style/CustomCheckboxTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="多选按钮"
+        android:textSize="30dp" />
+
+</LinearLayout>
