@@ -11,8 +11,8 @@ public class MainActivity extends ListActivity {
 
     private ArrayAdapter<String> adapter;
 
-    private LayoutAnimationController lac;
-    private ScaleAnimation sa;
+//    private LayoutAnimationController lac;
+//    private ScaleAnimation sa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +22,12 @@ public class MainActivity extends ListActivity {
 
         setListAdapter(adapter);
 
-        sa = new ScaleAnimation(0,1,0,1);
-        sa.setDuration(1000);
-        lac = new LayoutAnimationController(sa,0.5f);
+//        sa = new ScaleAnimation(0,1,0,1);
+//        sa.setDuration(1000);
+//        lac = new LayoutAnimationController(sa,0.5f);
+//
+//        getListView().setLayoutAnimation(lac);
 
-        getListView().setLayoutAnimation(lac);
+        setContentView(R.layout.main);
     }
 }
