@@ -4,9 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +33,26 @@ public class MainActivity extends AppCompatActivity {
 //
 //                v.startAnimation(animationSet);
 
-                v.startAnimation(AnimationUtils.loadAnimation(MainActivity.this,R.anim.animate_set));
+//                v.startAnimation(AnimationUtils.loadAnimation(MainActivity.this,R.anim.animate_set));
+
+                Animation animationSet = AnimationUtils.loadAnimation(MainActivity.this, R.anim.animate_set);
+
+                animationSet.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        Toast.makeText(MainActivity.this,"Animation Start",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        Toast.makeText(MainActivity.this,"Animation End",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+                });
+                v.startAnimation(animationSet);
             }
         });
     }
