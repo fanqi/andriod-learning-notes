@@ -22,8 +22,12 @@ public class MainActivity extends AppCompatActivity {
         frameLayout = (FrameLayout) findViewById(R.id.container);
         imageView = (ImageView) findViewById(R.id.imageView);
 
+
         //触摸监听器
         frameLayout.setOnTouchListener(new View.OnTouchListener() {
+            float currentDistance;
+            float lastDistance = -1;
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
@@ -46,10 +50,42 @@ public class MainActivity extends AppCompatActivity {
 //                        layoutParams.topMargin = (int) event.getY();
 //                        imageView.setLayoutParams(layoutParams);
                         //获取触摸点的数量
-                        System.out.println("pointer count:"+event.getPointerCount());
-                        //获取多个触摸点的坐标，触摸点从0开始
-                        if(event.getPointerCount()>=2)
-                            System.out.println(String.format("x1:%f y1:%f;x2:%f y2:%f",event.getX(0),event.getY(0),event.getX(1),event.getY(1)));
+//                        System.out.println("pointer count:"+event.getPointerCount());
+//                        //获取多个触摸点的坐标，触摸点从0开始
+//                        if(event.getPointerCount()>=2)
+//                            System.out.println(String.format("x1:%f y1:%f;x2:%f y2:%f",event.getX(0),event.getY(0),event.getX(1),event.getY(1)));
+
+                        //缩放图片示例
+                        if (event.getPointerCount() >= 2) {
+                            float offsetX = event.getX(0) - event.getX(1);
+                            float offsetY = event.getY(0) - event.getY(1);
+
+                            currentDistance = (float) Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+
+                            float offsetDistance = currentDistance - lastDistance;
+                            //缩放比例
+                            float scaling = 1.0f;
+                            if (lastDistance > 0) {
+                                //理论上是0，实际上设置5可以提升程序的容错能力,距离变化在（-5，5）之间不缩放
+                                if (offsetDistance > 5) {
+                                    System.out.println("放大");
+                                    scaling = 1.1f;
+                                } else if (offsetDistance < -5) {
+                                    System.out.println("缩小");
+                                    scaling = 0.9f;
+                                } else {
+                                    System.out.println("不变");
+                                }
+                                //缩放图片
+                                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
+                                layoutParams.width = (int) (scaling * imageView.getWidth());
+                                layoutParams.height = (int) (scaling * imageView.getHeight());
+                                imageView.setLayoutParams(layoutParams);
+                            }
+
+                            lastDistance = currentDistance;
+                        }
+
                         break;
                     //松开事件
                     case MotionEvent.ACTION_UP:
