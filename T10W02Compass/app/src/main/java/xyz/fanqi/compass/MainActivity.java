@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private TextView tvOrientation;
     private ImageView ivOrientation;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         //方向传感器
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-        //方向
+        
         tvOrientation = (TextView) findViewById(R.id.tvOrientation);
         ivOrientation = (ImageView) findViewById(R.id.ivOrientation);
     }
@@ -77,9 +78,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             orientationStr = "西北";
         }
 
-        tvOrientation.setText(orientationStr+" "+orientation+"°");
+
+        tvOrientation.setText(orientationStr + " " + orientation + "°");
 
         ivOrientation.animate().rotation(orientation).setDuration(100).start();
+
     }
 
 }
