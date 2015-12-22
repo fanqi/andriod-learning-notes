@@ -10,15 +10,29 @@
         android:id="@+id/BtnPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="使用应用内资源进行播放"/>
+        android:text="使用应用内资源进行播放" />
+
     <Button
         android:id="@+id/BtnStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="停止播放"/>
+        android:text="停止播放" />
+
     <Button
         android:id="@+id/BtnPause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="暂停播放"/>
+        android:text="暂停播放" />
+
+    <Button
+        android:id="@+id/BtnPlayIntent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用系统播放程序进行播放" />
+
+    <Button
+        android:id="@+id/BtnPlayMediaPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用mediaPlayer进行播放" />
 </LinearLayout>
