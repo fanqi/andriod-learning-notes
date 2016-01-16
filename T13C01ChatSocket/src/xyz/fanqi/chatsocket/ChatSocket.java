@@ -1,6 +1,8 @@
 package xyz.fanqi.chatsocket;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
 /**
@@ -8,32 +10,38 @@ import java.net.Socket;
  */
 public class ChatSocket extends Thread {
     Socket socket;
+
     public ChatSocket(Socket socket) {
         this.socket = socket;
     }
 
     @Override
     public void run() {
-        int count = 0;
-        while (true){
-            count++;
-            out("loop:"+count+"\n");
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-
+        in();
     }
 
-    public void out(String out){
+    public void out(String out) {
         try {
-            socket.getOutputStream().write(out.getBytes("UTF-8"));
+            socket.getOutputStream().write((out+"\n").getBytes("UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void in() {
+        try {
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(socket.getInputStream(), "UTF-8")
+            );
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                ChatManager.getChatManager().publish(this, line);
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
