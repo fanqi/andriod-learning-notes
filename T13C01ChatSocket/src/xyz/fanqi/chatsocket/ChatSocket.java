@@ -29,12 +29,14 @@ public class ChatSocket extends Thread {
     }
 
     public void in() {
+        out("你已经连接到本服务器了");
         try {
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(socket.getInputStream(), "UTF-8")
             );
             String line = null;
             while ((line = br.readLine()) != null) {
+                System.out.println(line);
                 ChatManager.getChatManager().publish(this, line);
             }
             br.close();
