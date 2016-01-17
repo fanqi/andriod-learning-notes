@@ -1,4 +1,4 @@
-package xyz.fanqi.nio.aipexample;
+package xyz.fanqi.nio.aioexample;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousFileChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.file.StandardOpenOption;
-import java.util.concurrent.Future;
 
 /**
  * Created by fanqi on 16/1/16.
