@@ -66,51 +66,51 @@ public class ChatProtocolHandler extends IoHandlerAdapter {
 
             switch (command.toInt()) {
 
-            case ChatCommand.QUIT:
-                session.write("QUIT OK");
-                session.close(true);
-                break;
-            case ChatCommand.LOGIN:
+                case ChatCommand.QUIT:
+                    session.write("QUIT OK");
+                    session.close(true);
+                    break;
+                case ChatCommand.LOGIN:
 
-                if (user != null) {
-                    session.write("LOGIN ERROR user " + user
-                            + " already logged in.");
-                    return;
-                }
+                    if (user != null) {
+                        session.write("LOGIN ERROR user " + user
+                                + " already logged in.");
+                        return;
+                    }
 
-                if (result.length == 2) {
-                    user = result[1];
-                } else {
-                    session.write("LOGIN ERROR invalid login command.");
-                    return;
-                }
+                    if (result.length == 2) {
+                        user = result[1];
+                    } else {
+                        session.write("LOGIN ERROR invalid login command.");
+                        return;
+                    }
 
-                // check if the username is already used
-                if (users.contains(user)) {
-                    session.write("LOGIN ERROR the name " + user
-                            + " is already used.");
-                    return;
-                }
+                    // check if the username is already used
+                    if (users.contains(user)) {
+                        session.write("LOGIN ERROR the name " + user
+                                + " is already used.");
+                        return;
+                    }
 
-                sessions.add(session);
-                session.setAttribute("user", user);
-                MdcInjectionFilter.setProperty(session, "user", user);
+                    sessions.add(session);
+                    session.setAttribute("user", user);
+                    MdcInjectionFilter.setProperty(session, "user", user);
 
-                // Allow all users
-                users.add(user);
-                session.write("LOGIN OK");
-                broadcast("The user " + user + " has joined the chat session.");
-                break;
+                    // Allow all users
+                    users.add(user);
+                    session.write("LOGIN OK");
+                    broadcast("The user " + user + " has joined the chat session.");
+                    break;
 
-            case ChatCommand.BROADCAST:
+                case ChatCommand.BROADCAST:
 
-                if (result.length == 2) {
-                    broadcast(user + ": " + result[1]);
-                }
-                break;
-            default:
-                LOGGER.info("Unhandled command: " + command);
-                break;
+                    if (result.length == 2) {
+                        broadcast(user + ": " + result[1]);
+                    }
+                    break;
+                default:
+                    LOGGER.info("Unhandled command: " + command);
+                    break;
             }
 
         } catch (IllegalArgumentException e) {
