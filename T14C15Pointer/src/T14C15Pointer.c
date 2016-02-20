@@ -41,11 +41,13 @@ int main(void) {
 	//访问完了之后再用
 	free(intPs);
 
+	//不同的平台，指针的长度不一致 32 4个字节 64位的操作系统 8个字节
 	char *str1 = "Hello";
 	printf("%ld\n",sizeof(str1));
-	//不同的平台，指针的长度不一致 32 4个字节 64位的操作系统 8个字节
+
 
 	//int64和指针可以项目转化
+	//JNI（Java Native Interface）技术会用到
 	char *str2 = "Hello";
 	int64_t p = (int64_t)str;
 	char *str3 = (char*)p;
