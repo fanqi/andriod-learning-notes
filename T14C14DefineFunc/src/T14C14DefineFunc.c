@@ -34,6 +34,13 @@ void sayHello(){
 
 #define call(NAME) say##NAME()
 
+//宏函数，可变参数
+#define LOG(LEVEL,FORMAT,...) printf(LEVEL);printf(FORMAT,__VA_ARGS__);
+#define LOG_E(FORMAT,...) LOG("ERROR:",FORMAT,__VA_ARGS__);
+#define LOG_W(FORMAT,...) LOG("WARN:",FORMAT,__VA_ARGS__);
+#define LOG_I(FORMAT,...) LOG("INFO:",FORMAT,__VA_ARGS__);
+#define LOG_D(FORMAT,...) LOG("DEBUG:",FORMAT,__VA_ARGS__);
+
 int main(void) {
 	printf("max number is %d\n", MAX(2, 5));
 
@@ -43,6 +50,11 @@ int main(void) {
 
 	call(Hi);
 	call(Hello);
+
+	LOG_E("Hello %s %d\n","World",100);
+	LOG_W("Hello %s %d\n","World",100);
+	LOG_I("Hello %s %d\n","World",100);
+	LOG_D("Hello %s %d\n","World",100);
 
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
