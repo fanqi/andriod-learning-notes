@@ -23,19 +23,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: T15C15VoidPointer
+all: T14C15VoidPointer
 
 # Tool invocations
-T15C15VoidPointer: $(OBJS) $(USER_OBJS)
+T14C15VoidPointer: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MacOS X C Linker'
-	gcc  -o "T15C15VoidPointer" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc  -o "T14C15VoidPointer" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) T15C15VoidPointer
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) T14C15VoidPointer
 	-@echo ' '
 
 .PHONY: all clean dependents

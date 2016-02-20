@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/T15C15VoidPointer.c 
+../src/T14C15VoidPointer.c 
 
 OBJS += \
-./src/T15C15VoidPointer.o 
+./src/T14C15VoidPointer.o 
 
 C_DEPS += \
-./src/T15C15VoidPointer.d 
+./src/T14C15VoidPointer.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
